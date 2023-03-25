@@ -33,5 +33,4 @@ yarn-error.log*
 
 #Auth
 .firebase.config.js
-./pages/api/auth/bumpertalk-firebase-adminsdk-tmaqa-ddda5095d0.json
-
+/pages/api/*
