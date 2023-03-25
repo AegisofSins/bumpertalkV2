@@ -33,4 +33,4 @@ yarn-error.log*
 
 #Auth
 .firebase.config.js
-/pages/api/*
+/pages/api/
