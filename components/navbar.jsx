@@ -34,16 +34,16 @@ export default function Navbar(){
         </Link>
       </div>
 			<div className="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
-				<ul className="flex flex-col lg:flex-row lg:gap-3 font-semibold">
-					{menuitems.map((item) => (
-            <li key={item.id}>
+				<ul className="flex flex-col lg:flex-row lg:gap-3 font-semibold" >
+					{menuitems.map((item) => {
+            <li key={item.uniqueId}>
 							<Link
 								href={item.path}
 								className="flex lg:px-3 py-2 text-gray-600 hover:text-gray-900">
 								{item.title}
 							</Link>
 						</li>
-            ))
+					})
           }
       	</ul>
 			</div>

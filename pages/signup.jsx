@@ -2,10 +2,14 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Ambulance from '../public/ambulance.svg'
 import Image from 'next/image';
+import { useAuth } from '@/context/AuthContext';
+
 
 
 
 const Signup = () => {
+  const { user } = useAuth();
+  console.log(user);
   const [data, setData] = useState( {
     email: '',
     password: '',
