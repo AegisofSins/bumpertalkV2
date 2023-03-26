@@ -1,9 +1,13 @@
 import '../pages/_app'
 import Link from 'next/link';
 import { slide as Menu } from 'react-burger-menu'
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
+
 
 export default function Navbar(){
-
+	const router = useRouter
+	const { user, logout } =useAuth();
 	const menuitems = [
 
 		{
@@ -49,16 +53,29 @@ export default function Navbar(){
 			</div>
 			<div>
 			<div className='lg:hidden'>
-			<Menu>
+			<Menu right>
 			<Link id="home" className="menu-item" href="/">Home</Link>
 			<Link id="about" className="menu-item" href="#">About</Link>
 			<Link id="contact" className="menu-item" href="#">Contact</Link>
-			<Link className="menu-item--small" href="/signup">Log In/Sign Up</Link>
+			{user  ? (
+				<Link className="menu-item--small" href="/login" onClick={() => {logout()}}>Logout</Link>	
+				) : <Link className="menu-item--small" href="/signup">Log In/Sign Up</Link> 
+			}
 			</Menu>
 			</div>
       <div className="hidden lg:flex items-center gap-4">
-        <Link href="/login" className="navbarLogin-signup navbar-login">Log in</Link>
-        <Link href="/signup" className="navbarLogin-signup navbar-signup">Sign up</Link>
+				{user ? (
+					<Link className="menu-item--small" href=''  
+					onClick={() => {
+						logout()
+						router.push('/login')
+					}}>Logout</Link>	
+				) :
+					<> 
+					<Link href="/login" className="navbarLogin-signup navbar-login">Log in</Link>
+					<Link href="/signup" className="navbarLogin-signup navbar-signup">Sign up</Link>
+				</>
+				}
       </div>
     </div>
 		</header>

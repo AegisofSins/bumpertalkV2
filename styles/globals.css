@@ -19,14 +19,14 @@
 		@apply
 		hover:border
 		hover:border-black
-		-m-1
+		-m-2
 	}
 	.navbar-signup{
 		@apply
 		hover:border
 		hover:border-black
 		hover:bg-red1
-		-m-1
+		-m-2
 	}
 
 }

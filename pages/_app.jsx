@@ -1,20 +1,26 @@
 import Navbar from "../components/navbar";
 import '../styles/globals.css'
-import Head from "next/head";
 import { AuthContextProvider } from "@/context/AuthContext";
+import ProtectedRoute from "@/components/protectedRoute";
+import { useRouter } from "next/router";
 
+const noAuthRequired = ['/', '/login', '/signup']
 
-function MyApp ({Component, pageProps}) {
-    return(
+function MyApp({ Component, pageProps }) {
+
+  const router = useRouter();
+    return (
       <AuthContextProvider>
-      <Head>
-        <title>BumperTalk</title>
-        <link rel="icon" href="/ambulance.svg" type="image/x-icon" />
-      </Head>
-      <Navbar />
-      <Component {...pageProps} />    
+        <Navbar />
+        {noAuthRequired.includes(router.pathname) ? (
+          <Component {...pageProps} />
+        ) : (
+          <ProtectedRoute>
+            <Component {...pageProps} />
+          </ProtectedRoute>
+        )}
       </AuthContextProvider>
     )
-}
+  }
 
 export default MyApp;
