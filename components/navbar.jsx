@@ -34,7 +34,7 @@ export default function Navbar(){
 
 
 	return( 
-		<header className="flex justify-between items-center p-5 bg-gray-50">
+		<header className="hidden flex justify-between items-center p-5 bg-gray-50">
 			<div className="flex w-full lg:w-auto items-center">
         <Link href="/" className="logo">
 					<span className="font-bold text-blue1">Beyond</span>
