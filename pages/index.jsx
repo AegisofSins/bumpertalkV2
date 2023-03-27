@@ -1,8 +1,8 @@
-import Login from "./login"
+import Homepage from "./homepage"
 
 const Home = () => {
   return ( 
-    <Login />
+    <Homepage />
   )
 }
 

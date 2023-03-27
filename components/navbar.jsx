@@ -12,44 +12,48 @@ export default function Navbar(){
 
 		{
 			title: "CME Credits",
-			path: "/pricing",
+			path: "",
+			uniqueId: '1',
 		},
 		{
 			title: "Snippet",
-			path: "/about",
+			path: "/",
+			uniqueId: '2',
 		},
 		{
 			title: "Courses",
-			path: "/blog",
+			path: "/",
+			uniqueId: '3',
 		},
 		{
 			title: "Contact",
-			path: "/contact",
+			path: "/",
+			uniqueId: '4',
 		},
 	];
 
 
 	return( 
-		<header className="flex flex-col lg:flex-row justify-between items-center p-5 bg-gray-50">
-			<div className="hidden lg:flex w-full lg:w-auto items-center">
+		<header className="flex justify-between items-center p-5 bg-gray-50">
+			<div className="flex w-full lg:w-auto items-center">
         <Link href="/" className="logo">
 					<span className="font-bold text-blue1">Beyond</span>
 					<span className="text-red1">thebox</span>
         </Link>
       </div>
-			<div className="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
-				<ul className="flex flex-col lg:flex-row lg:gap-3 font-semibold" >
-					{menuitems.map((item) => {
-            <li key={item.uniqueId}>
-							<Link
-								href={item.path}
-								className="flex lg:px-3 py-2 text-gray-600 hover:text-gray-900">
-								{item.title}
-							</Link>
-						</li>
-					})
-          }
-      	</ul>
+			<div className="hidden lg:flex">
+			<ul className="flex lg:gap-3 font-semibold">
+        { menuitems.map((item) => (
+          <li key={item.uniqueId}>
+            <Link
+							href={item.path}
+							className="flex lg:px-3 py-2 text-gray-600 hover:text-blue1">
+							{item.title}
+						</Link>
+					</li>
+				))
+				}
+			</ul>
 			</div>
 			<div>
 			<div className='lg:hidden'>
@@ -65,9 +69,9 @@ export default function Navbar(){
 			</div>
       <div className="hidden lg:flex items-center gap-4">
 				{user ? (
-					<Link className="menu-item--small" href=''  
+					<Link className="logout" href=''  
 					onClick={() => {
-						logout()
+						logout();
 						router.push('/login')
 					}}>Logout</Link>	
 				) :

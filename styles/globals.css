@@ -2,7 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/*----------------------------------------------------Base----------------------------------------------------------*/
+
+@layer base {
+
+	body	{
+		@apply
+		bg-gray-50
+	}
+}
+
+/*----------------------------------------------------Components-----------------------------------------------------*/
 @layer components {
+
 	.logo {
 		@apply 
 		text-xl 
@@ -29,7 +41,22 @@
 		-m-2
 	}
 
+	.logout{
+		@apply
+		hover:border
+		hover:border-black
+		hover:bg-red1
+		-m-2
+		font-semibold  
+		p-2 
+		w-48 
+		text-center
+		rounded-lg
+	}
+
 }
+
+/*--------------------------------------------------Burger Menu-------------------------------------------------------- */
 
 /* Position and sizing of burger button */
 .bm-burger-button {
