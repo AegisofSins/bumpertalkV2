@@ -48,7 +48,7 @@ const Signup = () => {
                 type="email"
                 name="email" 
                 id="email" 
-                placeholder="name@bcehs.com" 
+                placeholder="name@email.com" 
                 required=""
                 onChange={(e) => 
                   setData(
