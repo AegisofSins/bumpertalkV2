@@ -57,7 +57,7 @@ const Login = () => {
                       type="email" 
                       name="email" 
                       id="email"  
-                      placeholder="name@email.com" 
+                      placeholder="name@bcehs.ca" 
                       required=""
                       onChange={(e)=>setData({
                         ...data,
