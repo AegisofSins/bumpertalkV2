@@ -54,6 +54,21 @@
 		rounded-lg
 	}
 
+	.show-invalid-user{
+		@apply
+		flex
+		text-sm 
+		font-bold
+		text-red-600
+		pl-1
+		mt-1 !important
+	}
+
+	.hide-invalid-user{
+		@apply
+		hidden
+	};
+
 }
 
 /*--------------------------------------------------Burger Menu-------------------------------------------------------- */
@@ -80,7 +95,8 @@
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-	left: 2rem;
+	top: 0;
+	left: 0;
   height: 24px;
   width: 24px;
 }
@@ -117,23 +133,25 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Wrapper for item list */
 .bm-item-list {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	color: black;
 	text-align: right;
-	padding-right: 3rem;
 	height: fit-content !important;
+	background: none;
+	width: 10rem  !important;
 }
-
 
 /* Individual item */
 .bm-item {
-  display: inline-block;
-	font-weight: bolder
+	font-weight: bolder;
+	width: fit-content
 }
 
 .bm-item:hover{
 	color: rgb(0, 74, 141);
 }
-
 
 /* Styling of overlay */
 .bm-overlay {

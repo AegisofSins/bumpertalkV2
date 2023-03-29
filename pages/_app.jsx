@@ -1,11 +1,10 @@
 import Navbar from "../components/navbar";
-import Homepage from "./homepage";
 import '../styles/globals.css'
 import { AuthContextProvider } from "@/context/AuthContext";
 import ProtectedRoute from "@/components/protectedRoute";
 import { useRouter } from "next/router";
 
-const noAuthRequired = ['/login', '/signup']
+const noAuthRequired = ['/login', '/signup', '/forgetpass']
 
 function MyApp({ Component, pageProps }) {
 
