@@ -3,27 +3,40 @@ import { useState } from 'react';
 import Ambulance from '../public/ambulance.svg'
 import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
+import { useRef } from 'react'; 
+import { useRouter } from 'next/router';
 
 
 
 
 const Signup = () => {
-  const { user, signup } = useAuth();
+  const router = useRouter();
+  const errorFormat = useRef(null);
+  const errorMin = useRef(null)
+  const errorMatch = useRef(null)
+  const { signup } = useAuth();
   const [data, setData] = useState( {
     email: '',
     password: '',
     confPassword: ''
   });
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(data.password === data.confPassword && data.password.length > 6){
+    if(data.password === data.confPassword && data.password.length >= 6 && data.email.includes('@bcehs.ca')){
+      console.log('Signing up');
       try {
         await signup(data.email, data.password) 
-      } catch (err){
-        console.log(err);
-      } 
-    }else{
-      console.log('Passwords don\'t work');
+        router.push('/homepage')
+      } catch (error){
+        console.log(error);
+      }
+    } if ( data.email.includes('@bcehs.ca') == false ) {
+      errorFormat.current.classList.replace('hide-invalid-user', 'show-invalid-user')
+    } if (data.password.length < 6) {
+      errorMin.current.classList.replace('hide-invalid-user', 'show-invalid-user')
+    } if (data.password != data.confPassword){
+      errorMatch.current.classList.replace('hide-invalid-user', 'show-invalid-user')
     }
   };
   
@@ -34,6 +47,7 @@ const Signup = () => {
           src={Ambulance}
           alt="Ambulance"
           className='w-full sm:max-w-md xl:p-0 md:block'
+          priority
         />
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -48,15 +62,21 @@ const Signup = () => {
                 type="email"
                 name="email" 
                 id="email" 
-                placeholder="name@email.com" 
-                required=""
-                onChange={(e) => 
+                placeholder="name@bcehs.com" 
+                required
+                onChange={(e) => {
                   setData(
-                  {  ...data,
+                  {  
+                  ...data,
                   email: e.target.value
-                  })
+                  }
+                  )    
+                  const error = document.getElementById('errorFormat');
+                  error.classList.replace('show-invalid-user', 'hide-invalid-user');
+                }
                 }/>
             </div>
+            <p id="errorFormat"className="hide-invalid-user" ref={errorFormat}>Invalid format</p>
             <div>
               <label 
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -68,14 +88,20 @@ const Signup = () => {
               name="password" 
               id="password"
               minLength="6"
-              required=""
-              onChange={(e) => 
+              required
+              onChange={(e) => {
                 setData(
-                {  ...data,
-                password: e.target.value})
+                  {  
+                  ...data,
+                  password: e.target.value
+                  }
+                )
+              const error = document.getElementById('errorMin');
+              error.classList.replace('show-invalid-user', 'hide-invalid-user');
               }
+            }
               />
-              <p className='text-sm'>Password must contain at least 6 characters</p>
+              <p id='errorMin' className='hide-invalid-user' ref={errorMin}>Password must contain at least 6 characters</p>
             </div>
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" 
@@ -87,14 +113,18 @@ const Signup = () => {
               name="confirm-password" 
               id="confirm-password"
               minLength="6" 
-              required=""
-              onChange={(e) => 
+              required
+              onChange={(e) => {
                 setData(
                 {  ...data,
                 confPassword: e.target.value})
+              const error = document.getElementById('errorMatch');
+              error.classList.replace('show-invalid-user', 'hide-invalid-user');
+              }
               }
               />
-            </div>                 
+            </div> 
+            <p id='errorMatch' className='hide-invalid-user' ref={errorMatch}>Passwords don't match</p>                 
             <button
             className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" 
             type="submit" 

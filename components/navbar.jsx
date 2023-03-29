@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 
 export default function Navbar(){
-	const router = useRouter
+	const router = useRouter()
 	const { user, logout } =useAuth();
 	const [isMenuOpen, handleMenu] = useState(false);
 
@@ -98,11 +98,6 @@ export default function Navbar(){
 						onClick={() => handleCloseMenu()}>{item.title}</Link>
 					))
 				}
-
-			{/* <Link id="home" className="menu-item" href="/" onClick={() => handleCloseMenu()}>Home</Link>
-			<Link id="about" className="menu-item" href="#">About</Link>
-			<Link id="contact" className="menu-item" href="#">Contact</Link> */}
-			
 			{user  ? (
 				<Link className="menu-item--small" href="/login" onClick={() => {logout()}}>Logout</Link>	
 				) : <Link className="menu-item--small" href="/signup">Log In/Sign Up</Link> 

@@ -3,11 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from '@/context/AuthContext';
 import Ambulance from '../public/ambulance.svg'
-import  {useRouter}  from "next/navigation";
+import { useRouter}  from "next/navigation";
+import { useRef } from "react";
 
 
 
 const Login = () => {
+  const userNotFound = useRef(null);
+  const passInvalid = useRef(null);
   const router = useRouter();
   const { login } = useAuth();
   const [data, setData] = useState( {
@@ -18,10 +21,15 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
       try {
-        await login(data.email, data.password) 
-        router.push('/homepage')
-      } catch (err){
-        console.log(err);
+        await login(data.email, data.password)   
+          router.push('/homepage')
+      } catch (error){
+        const errorCode = error.code
+        if (errorCode === 'auth/user-not-found'){
+          userNotFound.current.classList.replace('hide-invalid-user', 'show-invalid-user')
+        }if (errorCode === 'auth/wrong-password') {
+          passInvalid.current.classList.replace('hide-invalid-user', 'show-invalid-user')
+        } 
       } 
   };
 
@@ -56,6 +64,7 @@ const Login = () => {
                         email: e.target.value
                       })}/>
                   </div>
+                  <p className="hide-invalid-user" ref={userNotFound}>User not found!</p>
                   <div>
                       <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                       <input 
@@ -70,8 +79,9 @@ const Login = () => {
                         password: e.target.value
                       })} />
                   </div>
+                  <p className="hide-invalid-user" ref={passInvalid}>Invalid Password</p>
                   <div className="flex items-center">                 
-                      <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
+                      <a href="/forgetpass" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                   </div>
                   <button 
                   className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
