@@ -24,7 +24,7 @@ export const AuthContextProvider = ({children}) => {
           uid: user.uid,
           email: user.email,
         })
-      }else{
+      } else {
         setUser(null);
       }
       setLoading(false)
@@ -59,7 +59,15 @@ export const AuthContextProvider = ({children}) => {
     })
   };
 
+  
+
   return ( 
-  <AuthContext.Provider value={{ user, login, signup, logout, forgetPassword }}>{loading ? null : children}</AuthContext.Provider> 
+  <AuthContext.Provider value={{ 
+    user, 
+    login, 
+    signup, 
+    logout, 
+    forgetPassword,  
+  }}>{loading ? null : children}</AuthContext.Provider> 
   )
 };
