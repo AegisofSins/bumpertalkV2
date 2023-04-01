@@ -6,6 +6,7 @@ import
   signInWithEmailAndPassword, 
   signOut, 
   sendPasswordResetEmail,
+  sendEmailVerification,
 } from 'firebase/auth'
 import { auth }  from '../firebase.config';
 
@@ -59,6 +60,21 @@ export const AuthContextProvider = ({children}) => {
     })
   };
 
+//Email verification 
+
+  // const sendVerifyEmail = () => {
+  //   try {
+  //     sendEmailVerification(auth.currentUser)
+  //     .then(() => {
+  //       // Email verification sent!
+  //       // ...
+  //     });
+  //     console.log('email sent');
+  //   } catch(error) {
+  //     console.log(error);
+  //   }  
+  // };
+
   
 
   return ( 
@@ -67,7 +83,7 @@ export const AuthContextProvider = ({children}) => {
     login, 
     signup, 
     logout, 
-    forgetPassword,  
+    forgetPassword, 
   }}>{loading ? null : children}</AuthContext.Provider> 
   )
 };

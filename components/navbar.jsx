@@ -24,46 +24,25 @@ export default function Navbar(){
 
 		{
 			title: "CME Credits",
-			path: "",
+			path: "/credits",
 			uniqueId: '1',
 		},
 		{
 			title: "Snippet",
-			path: "/",
+			path: "",
 			uniqueId: '2',
 		},
 		{
 			title: "Courses",
-			path: "/",
+			path: "",
 			uniqueId: '3',
 		},
 		{
 			title: "Contact",
-			path: "/",
+			path: "",
 			uniqueId: '4',
 		},
 	];
-
-	const hamburgerMenu = [
-	{
-		title: 'Home',
-		path: '/',
-		uniqueId: '1',
-	},
-	{
-		title: 'About',
-		path: '',
-		uniqueId: '2',
-	},
-	{
-		title: 'Contact',
-		path: '',
-		uniqueId: '3',
-	},
-
-	]
-
-
 	return( 
 		<header className="flex justify-between items-center p-5 bg-gray-50">
 			<div className="flex w-full lg:w-auto items-center">
@@ -90,7 +69,7 @@ export default function Navbar(){
 			<div className='lg:hidden'>
 			<Menu right isOpen={isMenuOpen} onStateChange={handleStateChange}>
 				{
-					hamburgerMenu.map((item) => (
+					menuitems.map((item) => (
 						<Link key={item.uniqueId}
 						id={item.title}
 						className="menu-item" 

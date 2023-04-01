@@ -23,7 +23,7 @@ const Login = () => {
       try {
         await login(data.email, data.password)   
           router.push('/homepage')
-      } catch (error){
+      } catch (error) {
         const errorCode = error.code
         if (errorCode === 'auth/user-not-found'){
           userNotFound.current.classList.replace('hide-invalid-user', 'show-invalid-user')
