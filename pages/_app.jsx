@@ -9,7 +9,7 @@ const noAuthRequired = ['/login', '/signup', '/forgetpass']
 function MyApp({ Component, pageProps }) {
 
   const router = useRouter();
-    return (
+    return ( 
       <AuthContextProvider>
         <Navbar />
         {noAuthRequired.includes(router.pathname) ? (

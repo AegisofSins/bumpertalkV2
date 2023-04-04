@@ -51,7 +51,6 @@
 		p-2 
 		w-48 
 		text-center
-		rounded-lg
 	}
 
 	.show-invalid-user{
@@ -67,6 +66,18 @@
 	.hide-invalid-user{
 		@apply
 		hidden
+	};
+
+	.creditCards {
+		@apply
+		flex-col 
+		gap-4 
+		items-start
+		border-2
+		border-blue1
+		rounded-lg
+		shadow-xl
+		p-2
 	};
 
 }
