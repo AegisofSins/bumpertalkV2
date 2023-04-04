@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { slide as Menu } from 'react-burger-menu'
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 
@@ -12,13 +12,20 @@ export default function Navbar(){
 	const { user, logout } =useAuth();
 	const [isMenuOpen, handleMenu] = useState(false);
 
-  const handleCloseMenu = () => {
-    handleMenu(false);
-  };
+	useEffect(()  => {
+		const body = document.body;
+		body.addEventListener('click', () => handleCloseMenu())
+		window.addEventListener('scroll', () => handleCloseMenu())
+	});
 
-  const handleStateChange = (state) => {
-    handleMenu(state.isOpen);
-  };
+	const handleCloseMenu = () => {
+		handleMenu(false);
+	};
+
+	const handleStateChange = (state) => {
+		handleMenu(state.isOpen);
+	};
+
 
 	const menuitems = [
 
@@ -39,7 +46,7 @@ export default function Navbar(){
 		},
 		{
 			title: "Contact",
-			path: "",
+			path: "/contact",
 			uniqueId: '4',
 		},
 	];
