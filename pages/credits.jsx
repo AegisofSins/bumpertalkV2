@@ -1,48 +1,50 @@
+import { db } from '@/firebase.config';
+import { collection, getDocs } from "firebase/firestore";
+
 import 'animate.css'
+import { useEffect, useRef, useState } from 'react';
 
-const Credits = () => {
 
-	const cards = [
-		{
-			title: "Dysrhytmia Education Course",
-			description:
-				"The goal of this dysrhythmia education course is to provide healthcare providers with information to better assist in cardiac dysrhythmia identification and management. This course provides detailed dysrhythmia material and activities to consolidate your learning.",
-				path: "https://learninghub.phsa.ca/Courses/19670",
-				credits:'4'
-		},
-		{
-			title: "100% Static HTML, No JS",
-			description:
-				"Astro renders your entire page to static HTML, removing all JavaScript from your final build by default.",
-				path: ""
-		},
-		{
-			title: "On-Demand Components",
-			description:
-				"Need some JS? Astro can automatically hydrate interactive components when they become visible on the page.  ",
-				path: ""
-		},
-		{
-			title: "Broad Integration",
-			description:
-				"Astro supports TypeScript, Scoped CSS, CSS Modules, Sass, Tailwind, Markdown, MDX, and any other npm packages.",
-				path: ""
-		},
-		{
-			title: "SEO Enabled",
-			description:
-				"Automatic sitemaps, RSS feeds, pagination and collections take the pain out of SEO and syndication. It just works!",
-				path: ""
-		},
-		{
-			title: "Community",
-			description:
-				"Astro is an open source project powered by hundreds of contributors making thousands of individual contributions.",
-				path: ""
-		},
+const Credits =  () => {
+
+	const [cardsLibrary, setCardsLibrary] = useState([]);
+
+	class card {
+		constructor(title, des, credits, path){
+			this.title = title;
+			this.des = des;
+			this.credits = credits
+			this.path = path
+		}
+		addCard() {
+			setCardsLibrary(cardsLibrary => [...cardsLibrary, this]);
+		}
+	};
+
+	const firebaseRan = useRef(false)
+
+	useEffect(()=> {
+		if(firebaseRan.current == false){
+			const fetchData = async () => {
+			const docRef = collection(db, 'credits')
+			const docSnap = await getDocs(docRef);
+				docSnap.forEach((doc=>{
+					let title = doc.data().title
+					let des = doc.data().des
+					let credits = doc.data().creds
+					let path = doc.data().path
+					const newCard = new card (title, des, credits, path);
+					newCard.addCard()
+						
+				}));	
+			}
+			fetchData();
 		
-	];
-
+			console.log(cardsLibrary);
+			
+			return () => { firebaseRan.current = true}
+		}
+	});
 
 	return(
 		<main className="animate__animated animate__fadeInUp mt-24 mb-24 md:mt-16 px-12">
@@ -56,11 +58,11 @@ const Credits = () => {
 			</section>
 			<section className="grid sm:grid-cols-2 md:grid-cols-3 mt-16 gap-16">
  				{
-    			cards.map((item, index) => (
+    			cardsLibrary.map((item, index) => (
         		<a href={item.path} key={index} target="_blank">
       				<div className="creditCards">
           			<h3 className="font-semibold text-lg">{item.title}</h3>
-          			<p className="text-slate-500 mt-2 leading-relaxed">{item.description}</p>
+          			<p className="text-slate-500 mt-2 leading-relaxed">{item.des}</p>
 								<p className= "text-red1 mt-2 leading-relaxed">Credits: {item.credits}</p>
       				</div>
 						</a>
