@@ -36,12 +36,12 @@ export default function Navbar(){
 		},
 		{
 			title: "Snippet",
-			path: "",
+			path: "/snippets",
 			uniqueId: '2',
 		},
 		{
 			title: "Courses",
-			path: "",
+			path: "/courses",
 			uniqueId: '3',
 		},
 		{

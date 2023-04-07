@@ -1,7 +1,7 @@
 import Topofpage from "@/components/topofpage";
 
-function Snippets() {
-	const title = 'Snippets';
+function Courses() {
+	const title = 'Courses';
 	const text = 'Currently under construction'
 
 	return (
@@ -9,4 +9,4 @@ function Snippets() {
 	)
 }
 
-export default Snippets;
+export default Courses;
