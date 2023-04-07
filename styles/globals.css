@@ -51,7 +51,6 @@
 		p-2 
 		w-48 
 		text-center
-		rounded-lg
 	}
 
 	.show-invalid-user{
@@ -68,6 +67,23 @@
 		@apply
 		hidden
 	};
+
+	.creditCards {
+		@apply
+		flex-col 
+		gap-4 
+		items-start
+		border-2
+		border-blue1
+		rounded-lg
+		shadow-xl
+		p-2
+	};
+
+	.creditCards:hover {
+		@apply
+		scale-110
+	}
 
 }
 
@@ -95,10 +111,7 @@
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-	top: 0;
-	left: 0;
-  height: 24px;
-  width: 24px;
+	display: none;
 }
 
 /* Color/shape of close button cross */
@@ -155,5 +168,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Styling of overlay */
 .bm-overlay {
-	height: 0px !important;
+	height: 0 !important;
+
 } 

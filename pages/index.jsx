@@ -1,9 +1,8 @@
-import Homepage from "./homepage"
+import Homepage from './homepage'
 
-const Home = () => {
-  return ( 
-    <Homepage />
-  )
+export default function index () {
+
+	return (
+		<Homepage />
+	)
 }
-
-export default Home

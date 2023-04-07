@@ -14,6 +14,7 @@ const Signup = () => {
   const errorFormat = useRef(null);
   const errorMin = useRef(null)
   const errorMatch = useRef(null)
+  const errorInUse = useRef(null);
   const { signup } = useAuth();
   const [data, setData] = useState( {
     email: '',
@@ -22,16 +23,20 @@ const Signup = () => {
   });
   
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if(data.password === data.confPassword && data.password.length >= 6 && data.email.includes('@bcehs.ca')){
+    e.preventDefault()
+    if(data.password === data.confPassword && data.password.length >= 6 && data.email.includes('')){
       console.log('Signing up');
       try {
-        await signup(data.email, data.password) 
+        await signup(data.email, data.password)
         router.push('/homepage')
       } catch (error){
-        console.log(error);
+        const errorCode = error.code
+        if(errorCode == 'auth/email-already-in-use'){
+          errorInUse.current.classList.replace('hide-invalid-user', 'show-invalid-user')
+        }
       }
-    } if ( data.email.includes('@bcehs.ca') == false ) {
+       
+    } if ( data.email.includes('') == false ) {
       errorFormat.current.classList.replace('hide-invalid-user', 'show-invalid-user')
     } if (data.password.length < 6) {
       errorMin.current.classList.replace('hide-invalid-user', 'show-invalid-user')
@@ -76,6 +81,7 @@ const Signup = () => {
                 }
                 }/>
             </div>
+            <p id="errorInUse"className="hide-invalid-user" ref={errorInUse}>Email already in use</p>
             <p id="errorFormat"className="hide-invalid-user" ref={errorFormat}>Invalid format</p>
             <div>
               <label 
@@ -134,7 +140,7 @@ const Signup = () => {
             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
               Already have an account? 
               <Link href="/login" className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-              > Login here</Link>
+              > Login</Link>
             </p>
             </form>
           </div>

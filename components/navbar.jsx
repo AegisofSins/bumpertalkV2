@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { slide as Menu } from 'react-burger-menu'
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 
@@ -12,66 +12,53 @@ export default function Navbar(){
 	const { user, logout } =useAuth();
 	const [isMenuOpen, handleMenu] = useState(false);
 
-  const handleCloseMenu = () => {
-    handleMenu(false);
-  };
+	useEffect(()  => {
+		const body = document.body;
+		body.addEventListener('click', () => handleCloseMenu())
+		window.addEventListener('scroll', () => handleCloseMenu())
+	});
 
-  const handleStateChange = (state) => {
-    handleMenu(state.isOpen);
-  };
+	const handleCloseMenu = () => {
+		handleMenu(false);
+	};
+
+	const handleStateChange = (state) => {
+		handleMenu(state.isOpen);
+	};
+
 
 	const menuitems = [
 
 		{
 			title: "CME Credits",
-			path: "",
+			path: "/credits",
 			uniqueId: '1',
 		},
 		{
 			title: "Snippet",
-			path: "/",
+			path: "/snippets",
 			uniqueId: '2',
 		},
 		{
 			title: "Courses",
-			path: "/",
+			path: "/courses",
 			uniqueId: '3',
 		},
 		{
 			title: "Contact",
-			path: "/",
+			path: "/contact",
 			uniqueId: '4',
 		},
 	];
-
-	const hamburgerMenu = [
-	{
-		title: 'Home',
-		path: '/',
-		uniqueId: '1',
-	},
-	{
-		title: 'About',
-		path: '',
-		uniqueId: '2',
-	},
-	{
-		title: 'Contact',
-		path: '',
-		uniqueId: '3',
-	},
-
-	]
-
-
-	return( 
+	return(
 		<header className="flex justify-between items-center p-5 bg-gray-50">
 			<div className="flex w-full lg:w-auto items-center">
-        <Link href="/" className="logo">
-					<span className="font-bold text-blue1">Beyond</span>
-					<span className="text-red1">thebox</span>
+        <Link href="/homepage" className="logo">
+					<span className="font-bold text-blue1">Bumper</span>
+					<span className="text-red1">Talk</span>
         </Link>
       </div>
+			{user ? (
 			<div className="hidden lg:flex">
 			<ul className="flex lg:gap-3 font-semibold">
         { menuitems.map((item) => (
@@ -85,12 +72,12 @@ export default function Navbar(){
 				))
 				}
 			</ul>
-			</div>
+			</div> ) : <div className="hidden "></div> }
 			<div>
 			<div className='lg:hidden'>
 			<Menu right isOpen={isMenuOpen} onStateChange={handleStateChange}>
 				{
-					hamburgerMenu.map((item) => (
+					menuitems.map((item) => (
 						<Link key={item.uniqueId}
 						id={item.title}
 						className="menu-item" 
@@ -120,6 +107,5 @@ export default function Navbar(){
       </div>
     </div>
 		</header>
-
 	)
 }
