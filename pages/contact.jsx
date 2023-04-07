@@ -40,7 +40,7 @@ const Contact = () => {
   };
 
 	return (
-		<>
+		<main>
 		<section className="animate__animated animate__fadeInUp mt-24 mb-2 md:mt-16 px-12">
 			<h2 className="text-center text-4xl lg:text-5xl font-bold lg:tracking-tight">
 				Contact
@@ -74,7 +74,7 @@ const Contact = () => {
       	</form>
   		</div>
 		</section>
-		</>
+		</main>
 	)
 };
 
