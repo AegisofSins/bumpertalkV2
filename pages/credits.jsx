@@ -41,12 +41,11 @@ const Credits =  () => {
 				}));	
 			}
 			fetchData();
-		
-			console.log(cardsLibrary);
 			
 			return () => { firebaseRan.current = true}
 		}
 	});
+	cardsLibrary.sort((a,b) => a.credits - b.credits)
 
 	return(
 		<main className= "mt-24 mb-24 md:mt-16 px-12">

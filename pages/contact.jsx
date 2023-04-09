@@ -25,7 +25,6 @@ const Contact = () => {
   const formRef = useRef();
   const submitContact = async (e) => {
     e.preventDefault();
-    console.log(e);
     const res = await sendContactForm({
       email: e.target[0].value,
       subject: e.target[1].value,
